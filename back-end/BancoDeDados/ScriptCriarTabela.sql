@@ -4,14 +4,6 @@ CREATE TABLE tb_tags(
     PRIMARY KEY (Id)
 );
 
-CREATE TABLE tb_previa(
-    id  INT NOT NULL ,
-    titulo VARCHAR (75) not null,
-    sinopse VARCHAR, 
-    imagem_capa  VARCHAR not null,
-    PRIMARY KEY (Id)
-);
-
 CREATE TABLE tb_noticia(
     id  INT NOT NULL ,
     site_buscado VARCHAR not null,
@@ -21,7 +13,9 @@ CREATE TABLE tb_noticia(
     data_publicacao timestamp not null,
     data_modificada timestamp,
     conteudo VARCHAR,
-    fk_previa int NOT NULL REFERENCES tb_previa(id),
+    titulo VARCHAR (75) not null,
+    sinopse VARCHAR, 
+    imagem_capa  VARCHAR not null,
     PRIMARY KEY (Id)
 );
 
