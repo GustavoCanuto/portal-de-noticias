@@ -1,7 +1,5 @@
 package br.com.magnasistemas.apimagnaspnewsusuarios.controller;
 
-
-
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,28 +20,29 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("/login")
 @RestController
 public class LoginController {
-	
-	 @Autowired
-	 private LoginService loginService;
-	 
+
+	@Autowired
+	private LoginService loginService;
+
+	@Autowired
+	private GoogleAuthService authService;
+
 	@PostMapping
 	public ResponseEntity<String> token(@RequestBody UserDto user) {
-		return loginService.logar(user);	
+		return loginService.logar(user);
 	}
-	
-    @Autowired
-    private GoogleAuthService authService;
 
-    @GetMapping("/google")
-    public void googleAuthRedirect(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       
-    	authService.googleAuthRedirect(response);
-    }
+	@GetMapping("/google")
+	public void googleAuthRedirect(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    @GetMapping("/callback")
-    public ResponseEntity<String> googleAuthCallback(@RequestParam("code") String code, @RequestParam("state") String state) {
-    	String accessToken = authService.exchangeCodeForAccessToken(code);
-        return authService.tokenGoogle(accessToken);
-    }
-	
+		authService.googleAuthRedirect(response);
+	}
+
+	@GetMapping("/callback")
+	public ResponseEntity<String> googleAuthCallback(@RequestParam("code") String code,
+			@RequestParam("state") String state) {
+		String accessToken = authService.exchangeCodeForAccessToken(code);
+		return authService.tokenGoogle(accessToken);
+	}
+
 }

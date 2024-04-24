@@ -18,6 +18,7 @@ import br.com.magnasistemas.apimagnaspnews.dto.noticia.PreviaNoticiaDto;
 import br.com.magnasistemas.apimagnaspnews.entity.Noticia;
 import br.com.magnasistemas.apimagnaspnews.repository.NoticiaRepository;
 import br.com.magnasistemas.apimagnaspnews.validacoes.ValidacaoException404;
+import br.com.magnasistemas.apimagnaspnews.validacoes.acesso.ValidarAcessoRole;
 import br.com.magnasistemas.apimagnaspnews.validacoes.link.ValidaLinkNoticia;
 import br.com.magnasistemas.apimagnaspnews.validacoes.link.ValidaLinkSite;
 
@@ -32,6 +33,7 @@ public class NoticiaService {
 	
 	@Autowired
 	private ValidaLinkSite validaLinkSite;
+	
 
 	private ExecutorService executor = Executors.newFixedThreadPool(10);
 	
@@ -261,6 +263,7 @@ public class NoticiaService {
 	public List<PreviaNoticiaDto> buscarPorSite(String site, LocalDateTime inicioPeriodo, LocalDateTime fimPeriodo,
 			Pageable paginacao, String cacheManager) {
 
+		
 		validaLinkSite.validar(site, cacheManager);
 		List<CompletableFuture<Noticia>> futuros;
 

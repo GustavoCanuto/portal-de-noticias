@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.magnasistemas.apimagnaspnews.dto.noticia.NoticiaCompletaDto;
 import br.com.magnasistemas.apimagnaspnews.dto.noticia.PreviaNoticiaDto;
 import br.com.magnasistemas.apimagnaspnews.service.NoticiaService;
+import br.com.magnasistemas.apimagnaspnews.validacoes.acesso.ValidarAcessoRole;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +35,9 @@ public class NoticiaController {
 	
 	@Autowired
 	private NoticiaService noticiaService;
+	
+	@Autowired
+	private List<ValidarAcessoRole> validadoresAcesso;
 
 	private static final String SEM_CACHE = "SemCache";
 
@@ -80,6 +85,9 @@ public class NoticiaController {
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fimPeriodo,
 			@PageableDefault(size = 10) Pageable paginacao, String cache) {
 		try {
+			
+			validadoresAcesso.forEach(v -> v.validar(site));
+			
 			return ResponseEntity.ok(noticiaService.criarPaginacao(paginacao,
 					noticiaService.buscarPorSite(site, inicioPeriodo, fimPeriodo, paginacao, cache)));
 		} catch (RedisConnectionFailureException ex) {
