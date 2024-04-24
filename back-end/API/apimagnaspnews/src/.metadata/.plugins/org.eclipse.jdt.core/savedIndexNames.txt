@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\dev\projects\MagnaSpNews\portal-de-noticias\back-end\API\apimagnaspnews\src\.metadata\.plugins\org.eclipse.jdt.core
+2779629487.index
+4116763604.index
+1865797976.index
