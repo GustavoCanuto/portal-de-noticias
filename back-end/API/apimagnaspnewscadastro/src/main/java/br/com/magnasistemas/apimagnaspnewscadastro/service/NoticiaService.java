@@ -3,6 +3,8 @@ package br.com.magnasistemas.apimagnaspnewscadastro.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import br.com.magnasistemas.apimagnaspnewscadastro.validacoes.ValidacaoException
 @Service
 public class NoticiaService {
 
+	private static final Logger logger = LoggerFactory.getLogger(NoticiaService.class);
+	
 	@Autowired
 	private NoticiaRepository repository;
 
@@ -69,12 +73,12 @@ public class NoticiaService {
 			List<Tag> tags = new ArrayList<>();
 
 			for (Tag tagDto : tagsEnviadas) {
+				 logger.info("Tag sendo cadastrada já existe, reutilizando tag existente");
 				Tag tag = tagRepository.findByNome(tagDto.getNome());
 				if (tag != null) {
 					tags.add(tag);
 				} else {
-					// Se a tag não existir,
-					// criar uma nova tag
+					logger.info("Tag sendo cadastrada não existe, criando nova tag");
 					tag = new Tag(tagDto.getNome());
 					tagRepository.save(tag);
 					tags.add(tag);

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import br.com.magnasistemas.apimagnaspnewscadastro.ApiMagnaSPNewsCadastroApplication;
 
-public class ApiMagnaSPNewsApplicationCadastroTest {
+class ApiMagnaSPNewsApplicationCadastroTest {
 
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;

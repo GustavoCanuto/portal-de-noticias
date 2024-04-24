@@ -3,12 +3,13 @@ import cleanNoticia from "../utils/cleanNoticia.js";
 import replaceClasses from "../utils/replaceClasses.js";
 import { cadastrarNoticia, atualizarNoticia } from "../repository/saveBd.js";
 import { getAtualizar } from './percorrerNoticias.js';
+import logger from "../log.js";
 
 let linksVerificado = [];
 
 export default async function processaLink(link, verificaData, pageInstance){
 
-    console.log("processo de pegar conteudo");
+  logger.info("processo de pegar conteudo");
 
     let cache = {
       link: link.link,
@@ -19,7 +20,7 @@ export default async function processaLink(link, verificaData, pageInstance){
 
     if (verificaData.grafico){
 
-      console.log("noticia com grafico");
+      logger.info("noticia com grafico");
 
       await pageInstance.evaluate(async () => {
         await new Promise((resolve, reject) => {
@@ -42,7 +43,7 @@ export default async function processaLink(link, verificaData, pageInstance){
     const pageContent = await getNoticia(pageInstance, link, verificaData);
   
     if (!pageContent) {
-      console.error("Conteúdo da página não encontrado.");
+      logger.error("Conteúdo da página não encontrado.");
       return; //throw erro
    }
    

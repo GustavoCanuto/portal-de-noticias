@@ -34,7 +34,7 @@ import br.com.magnasistemas.apimagnaspnews.repository.TagRepository;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-public class NoticiaControllerTest {
+ class NoticiaControllerTest {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
@@ -328,7 +328,7 @@ public class NoticiaControllerTest {
 		
 		String urlCompleta = site+periodoInicial+periodoFinal;
 		ResponseEntity<PageResponse<PreviaNoticiaDto>> responseEntity = restTemplate.exchange(
-				URI_PESQUISA_TAG + "/tag1?"+ urlCompleta,
+				URI_PESQUISA_TAG + "?nomeTag=tag1"+ urlCompleta,
 				HttpMethod.GET, null, new ParameterizedTypeReference<PageResponse<PreviaNoticiaDto>>() {
 				});
 		
@@ -428,10 +428,10 @@ public class NoticiaControllerTest {
 	static Stream<Arguments> parametrosSiteInvalido() {
 		return Stream.of(
 
-				Arguments.of("testesiteforadoar",
+				Arguments.of("TESTE_SITE_FORA_DO_AR",
 						"Site fora do Ar!"),
 
-				Arguments.of("testesitenotfound",
+				Arguments.of("TESTE_SITE_NOT_FOUND",
 						"Site fora do Ar!"),
 				
 				Arguments.of("t2",

@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import logger from "../log.js";
 
  async function cadastrarNoticia(pageContent) {
   try {
@@ -10,14 +11,14 @@ import fetch from 'node-fetch';
       body: JSON.stringify(pageContent),
     });
     if (response.ok) {
-      console.log('Notícia cadastrada com sucesso\n');
+      logger.info('Notícia cadastrada com sucesso\n');
     } else {
         const errorText = await response.text(); // Aqui você obtém o texto do erro
-        console.error('Erro ao cadastrar notícia:', response.statusText, errorText);
+        logger.error('Erro ao cadastrar notícia:'+ response.statusText+" "+ errorText);
     }
   } catch (error) {
     const errorText = await response.text(); // Aqui você obtém o texto do erro
-    console.error('Erro ao cadastrar notícia:', response.statusText, errorText);
+    logger.error('Erro ao cadastrar notícia:'+ response.statusText+" "+ errorText);
 
   }
 }
@@ -32,13 +33,13 @@ import fetch from 'node-fetch';
       body: JSON.stringify(pageContent),
     });
     if (response.ok) {
-      console.log('Notícia atualizada com sucesso\n');
+      logger.info('Notícia atualizada com sucesso\n');
     } else {
         const errorText = await response.text(); // Aqui você obtém o texto do erro
-        console.error('Erro ao atualizar notícia:', response.statusText, errorText);
+        logger.error('Erro ao atualizar notícia:'+ response.statusText+" "+ errorText);
     }
   } catch (error) {
-    console.error('Erro ao atualizar notícia:', error);
+    logger.error('Erro ao atualizar notícia: '+ error);
   }
 }
 

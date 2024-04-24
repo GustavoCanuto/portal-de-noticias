@@ -1,12 +1,13 @@
 import getNoticia from "../pageAcess/getNoticia.js";
 import { cadastrarNoticia, atualizarNoticia } from "../repository/saveBd.js";
 import { getAtualizar } from './percorrerNoticias.js';
+import logger from "../log.js";
 
 let linksVerificado = [];
 
 export default async function processaLink(link, verificaData, pageInstance){
 
-    console.log("\n processo de pegar conteudo");
+  logger.info(" processo de pegar conteudo");
    
    let cache = {
     link: link.link,
@@ -18,7 +19,7 @@ export default async function processaLink(link, verificaData, pageInstance){
     const pageContent = await getNoticia(pageInstance, link, verificaData);
   
     if (!pageContent) {
-      console.error("Conteúdo da página não encontrado.");
+      logger.error("Conteúdo da página não encontrado.");
       return; //throw erro
    }
 
@@ -30,7 +31,7 @@ export default async function processaLink(link, verificaData, pageInstance){
   
    // Verifica se a expressão regular encontra correspondência no conteúdo ou no título
    if (!regex.test(conteudo) && !regex.test(titulo)) {
-    console.log("\nTexto não é de São Paulo. Vendo próxima notícia. ** link :"+ link.link+"\n");
+    logger.info("Texto não é de São Paulo. Vendo próxima notícia. ** link :"+ link.link+"\n");
      return;
    } 
   

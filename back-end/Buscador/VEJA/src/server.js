@@ -1,6 +1,7 @@
 import express from 'express';
 import puppeteer from 'puppeteer';
 import app  from './app.js';
+import logger from "./log.js";
 
 const port = 3005;
 const server = express();
@@ -14,8 +15,8 @@ const server = express();
       // Agendar a busca a cada 30 minutos
       setInterval(async () => await app(browserInstance), 30 * 60 * 1000);
     } catch (error) {
-      console.error('Erro ao iniciar o navegador:', error);
-      console.log('Reiniciando o navegador...');
+      logger.error('Erro ao iniciar o navegador:'+ error);
+      logger.info('Reiniciando o navegador...');
 
       // Tentar reiniciar o navegador após um intervalo de tempo
       setTimeout(() => runApp(), 2 * 60 * 1000); // Reiniciar após 2 minutos
@@ -26,5 +27,5 @@ const server = express();
 })();
 
 server.listen(port, () => {
-  console.log("Servidor rodando na porta " + port);
+  logger.info("Servidor rodando na porta " + port);
 });

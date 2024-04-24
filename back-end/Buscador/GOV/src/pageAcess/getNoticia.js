@@ -1,9 +1,11 @@
+import logger from "../log.js";
+
 export default async function getNoticia(pageInstance, link, dataPublicacao) {
   try {
     const pageContent = await pageInstance.evaluate(extractNoticia, link, dataPublicacao);
     return pageContent;
   } catch (error) {
-    console.error("Erro ao buscar os dados da página:", error.message);
+    logger.error("Erro ao buscar os dados da página: "+ error.message);
     throw error;
   }
 }

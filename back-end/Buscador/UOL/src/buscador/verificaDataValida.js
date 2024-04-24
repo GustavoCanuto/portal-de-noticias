@@ -1,13 +1,14 @@
 import isDataDoDiaAnterior from "../utils/checkDate.js";
 import { setLoop, getPagina, setPagina  } from './percorrerNoticias.js';
+import logger from "../log.js";
 
 async function verificaDataFucntion(verificaData){
 
-    console.log(verificaData.dataPublicacao)
-    console.log("Data da publicação/ Atualizacao é do dia anterior.\n");
+  logger.info(verificaData.dataPublicacao)
+  logger.info("Data da publicação/ Atualizacao é do dia anterior.\n");
   
    if (getPagina()>=3) {
-       console.log("finalizado busca");
+    logger.info("finalizado busca");
       setPagina(0);
       setLoop(false);
     } 

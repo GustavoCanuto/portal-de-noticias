@@ -13,12 +13,12 @@ public class PreviaNoticiaDto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	Long id;
-	String titulo;
-	String sinopse;
-	String imagemCapa;
-	String siteBuscado;
-	LocalDateTime dataPublicacao;
+	private Long id;
+	private String titulo;
+	private String sinopse;
+	private String imagemCapa;
+	private String siteBuscado;
+	private LocalDateTime dataPublicacao;
 	
 	
 	public PreviaNoticiaDto() {

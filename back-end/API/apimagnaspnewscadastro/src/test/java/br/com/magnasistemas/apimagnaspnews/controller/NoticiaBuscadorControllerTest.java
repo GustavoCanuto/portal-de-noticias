@@ -35,7 +35,7 @@ import br.com.magnasistemas.apimagnaspnewscadastro.repository.TagRepository;
 
 @SpringBootTest(classes = ApiMagnaSPNewsCadastroApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-public class NoticiaBuscadorControllerTest {
+class NoticiaBuscadorControllerTest {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
@@ -52,7 +52,7 @@ public class NoticiaBuscadorControllerTest {
 
 	private final String URI_PRINCIPAL = "/noticia";
 
-
+	private static LocalDateTime horaDataAtual = LocalDateTime.now();
 	
 	@BeforeEach
 	void inicializar() {
@@ -71,7 +71,7 @@ public class NoticiaBuscadorControllerTest {
 			    "https://www.google.com/search?q=yy",
 			    "categoria",
 			    "autoria",
-			    LocalDateTime.now(),
+			    horaDataAtual,
 			    null,
 			    "<p>conteudo</p>",
 			    "titulo",
@@ -155,7 +155,7 @@ public class NoticiaBuscadorControllerTest {
 						Arrays.asList(new Tag("tagNova")),"noticia com esse link já registrado"),
 				
 				Arguments.of("g1", "https://www.google.com/", "categoria", "autoria",
-						LocalDateTime.of(2024, 02, 22, 16, 00), null, "<p>conteudo</p>", "titulo", "sinopse", "img", 5L,
+						horaDataAtual, null, "<p>conteudo</p>", "titulo", "sinopse", "img", 5L,
 						null,"noticia com esse titulo e autoria já registrado"));
 
 			

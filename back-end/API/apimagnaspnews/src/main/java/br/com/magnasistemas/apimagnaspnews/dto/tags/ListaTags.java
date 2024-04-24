@@ -11,8 +11,8 @@ public class ListaTags implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	Long id;
-	String nome;
+	private Long id;
+	private String nome;
 
 	public ListaTags(Tag tag) {
 		this(tag.getId(), tag.getNome());

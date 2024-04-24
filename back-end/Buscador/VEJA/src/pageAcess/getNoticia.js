@@ -7,7 +7,7 @@ export default async function getNoticia(pageInstance, link, verificaData) {
     );
     return pageContent;
   } catch (error) {
-    console.error("Erro ao buscar os dados da página:", error.message);
+    console.error("Erro ao buscar os dados da página:"+ error.message);
     throw error;
   }
 }

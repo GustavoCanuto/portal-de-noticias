@@ -22,7 +22,7 @@ export default async function getDataNoticia(pageInstance) {
 
       return verificaData;
   } catch (error) {
-      console.error('Erro ao buscar os dados da página:', error.message); 
+    logger.error('Erro ao buscar os dados da página:'+ error.message); 
       throw error;
   }
 }

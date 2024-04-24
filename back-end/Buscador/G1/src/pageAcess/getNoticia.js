@@ -3,7 +3,7 @@ export default async function getNoticia(pageInstance, link,verificaData) {
     const pageContent = await pageInstance.evaluate(extractNoticia, link,verificaData);
     return pageContent;
   } catch (error) {
-    console.error("Erro ao buscar os dados da página:", error.message);
+    logger.error("Erro ao buscar os dados da página:"+ error.message);
     throw error;
   }
 }

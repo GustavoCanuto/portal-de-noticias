@@ -4,6 +4,7 @@ import buscaDados from "./buscarDadosLink.js";
 import verificaLink from "./verificaLink.js";
 import verificaDataDiaAnterior from "./verificaDataValida.js";
 import processaLink from "./processaLink.js";
+import logger from "../log.js";
 
 let pagina = 0;
 let loop = true;
@@ -14,7 +15,7 @@ let atualizar = false;
 let categoriaLink = [ 'politica', 'ultimas', 'cotidiano', 'saude']
 
 export async function percorrerNoticias(pageInstance) {
-  console.log("Iniciado busca");
+  logger.info("Iniciado busca");
 
   pagina = 0;
   loop = true;
@@ -23,9 +24,9 @@ export async function percorrerNoticias(pageInstance) {
   proximoLoop = false;
 
   while (loop) {
-    console.log("Inicio busca de links\n");
-    console.log("pagina: "+ pagina)
-    console.log(categoriaLink[pagina]);
+    logger.info("Inicio busca de links\n");
+    logger.info("pagina: "+ pagina)
+    logger.info(categoriaLink[pagina]);
     let dados2 = await buscaDados(pageInstance);
     let count = 1;
 
@@ -35,7 +36,7 @@ export async function percorrerNoticias(pageInstance) {
       try {
         await acessaLink(link.link,pageInstance);
 
-        console.log("pegar data noticia");
+        logger.info("pegar data noticia");
         const verificaData = await getDataNoticia(pageInstance);
 
         if (!verificaLink(link, verificaData)) continue;
@@ -45,7 +46,7 @@ export async function percorrerNoticias(pageInstance) {
           break;
         } 
 
-        console.log("processando link...");
+        logger.info("processando link...");
         count++;
         await processaLink(link, verificaData, pageInstance);
         
@@ -53,7 +54,7 @@ export async function percorrerNoticias(pageInstance) {
 
         pageInstance = await timeoutError(pageInstance,error.name,link.link);
 
-        console.error("\nErro ao buscar os dados da página:", error.message +"\n");
+        logger.error("\nErro ao buscar os dados da página:"+ error.message +"\n");
         continue;
       }
     }
@@ -63,7 +64,7 @@ export async function percorrerNoticias(pageInstance) {
 
 async function timeoutError(pageInstance,error,link){
   if (error === 'TimeoutError') {
-    console.error('\nTimeout de navegação. Recarregando a página...\n'+ link);
+    logger.error('\nTimeout de navegação. Recarregando a página...\n'+ link);
     await pageInstance.reload();
     await clearCache(pageInstance);
   }

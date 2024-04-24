@@ -1,3 +1,5 @@
+import logger from "../log.js";
+
 export default async function getDataNoticia(pageInstance) {
   try {
       const verificaData = await pageInstance.evaluate(() => {
@@ -11,10 +13,10 @@ export default async function getDataNoticia(pageInstance) {
              dataPublicacao: publicacao
           };
       });
-      console.log(verificaData.dataPublicacao)
+      logger.info(verificaData.dataPublicacao)
       return verificaData;
   } catch (error) {
-      console.error('Erro ao buscar os dados da página:', error.message); 
+    logger.error('Erro ao buscar os dados da página:'+ error.message); 
       throw error;
   }
 }

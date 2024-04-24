@@ -15,22 +15,22 @@ public class NoticiaCompletaDto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	Long id;
+	private Long id;
 
 
-	String siteBuscado;
-	String linkDaNoticiaOficial;
-	String categoria;
-	String autoria;
-	LocalDateTime dataPublicacao;
-	LocalDateTime dataModificada;
-	String conteudo;
-	String titulo;
-	String sinopse;
-	String imagemCapa;
-	Long numeroVisualizacao;
+	private String siteBuscado;
+	private String linkDaNoticiaOficial;
+	private String categoria;
+	private String autoria;
+	private LocalDateTime dataPublicacao;
+	private LocalDateTime dataModificada;
+	private String conteudo;
+	private String titulo;
+	private String sinopse;
+	private String imagemCapa;
+	private Long numeroVisualizacao;
 
-	List<ListaTags> tags;
+	private List<ListaTags> tags;
 
 	public NoticiaCompletaDto(Noticia noticia) {
 		this(noticia.getId(),

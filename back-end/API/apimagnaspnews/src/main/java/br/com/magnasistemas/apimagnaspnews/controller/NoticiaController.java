@@ -20,12 +20,17 @@ import br.com.magnasistemas.apimagnaspnews.dto.noticia.NoticiaCompletaDto;
 import br.com.magnasistemas.apimagnaspnews.dto.noticia.PreviaNoticiaDto;
 import br.com.magnasistemas.apimagnaspnews.service.NoticiaService;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("noticia")
 public class NoticiaController {
 
+	private static final Logger logger = LoggerFactory.getLogger(NoticiaController.class);
+	private static final String MESSANGEM_ERRO_REDIS = "Erro ao tentar se conectar com servidor Redis: {}";
+	
 	@Autowired
 	private NoticiaService noticiaService;
 
@@ -36,6 +41,7 @@ public class NoticiaController {
 		try {
 			return ResponseEntity.ok(noticiaService.detalharNoticia(id, cache));
 		} catch (RedisConnectionFailureException ex) {
+			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.detalhar(id, SEM_CACHE);
 		}
 	}
@@ -49,6 +55,7 @@ public class NoticiaController {
 		try {
 			return ResponseEntity.ok(noticiaService.detalharPorLinkNoticia(titulo,site,dataPublicacao, cache));
 		} catch (RedisConnectionFailureException ex) {
+			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.detalharPorLinkNoticia(site,dataPublicacao,titulo, SEM_CACHE);
 		}
 	}
@@ -60,6 +67,7 @@ public class NoticiaController {
 			return ResponseEntity
 					.ok(noticiaService.criarPaginacao(paginacao, noticiaService.listarPrevias(paginacao, cache)));
 		} catch (RedisConnectionFailureException ex) {
+			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.listar(paginacao, SEM_CACHE);
 		}
 
@@ -75,6 +83,7 @@ public class NoticiaController {
 			return ResponseEntity.ok(noticiaService.criarPaginacao(paginacao,
 					noticiaService.buscarPorSite(site, inicioPeriodo, fimPeriodo, paginacao, cache)));
 		} catch (RedisConnectionFailureException ex) {
+			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.buscarPorSite(site, inicioPeriodo, fimPeriodo, paginacao, SEM_CACHE);
 		}
 	}
@@ -92,11 +101,12 @@ public class NoticiaController {
 					.ok(noticiaService.criarPaginacao(paginacao,
 							noticiaService.buscarPorCategoria(site, inicioPeriodo, fimPeriodo, categorias, paginacao, cache)));
 		} catch (RedisConnectionFailureException ex) {
+			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.buscarPorCategoria(site, inicioPeriodo, fimPeriodo, categorias, paginacao, SEM_CACHE);
 		}
 	}
 
-	@GetMapping("/tag/nomeTag")
+	@GetMapping("/tag")
 	public ResponseEntity<Page<PreviaNoticiaDto>> buscarPorNomeTag(
 			@RequestParam(required = true)  String nomeTag,
 			@RequestParam(required = false) String site,
@@ -108,12 +118,14 @@ public class NoticiaController {
 					.ok(noticiaService.criarPaginacao(paginacao,
 							noticiaService.buscarPorNomeTag(site, inicioPeriodo, fimPeriodo, nomeTag, paginacao, cache)));
 		} catch (RedisConnectionFailureException ex) {
+			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.buscarPorNomeTag(nomeTag, site, inicioPeriodo, fimPeriodo, paginacao, SEM_CACHE);
 		}
 	}
 
 	@GetMapping("/titulo")
-	public ResponseEntity<Page<PreviaNoticiaDto>> buscarPorTitulo(@RequestParam String palavra,
+	public ResponseEntity<Page<PreviaNoticiaDto>> buscarPorTitulo(
+			@RequestParam String palavra,
 			@RequestParam(required = false) String site,
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicioPeriodo,
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fimPeriodo,
@@ -123,6 +135,7 @@ public class NoticiaController {
 					.ok(noticiaService.criarPaginacao(paginacao,
 							noticiaService.listarPorTitulo(site, inicioPeriodo, fimPeriodo, palavra, paginacao, cache)));
 		} catch (RedisConnectionFailureException ex) {
+			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.buscarPorTitulo(palavra, site, inicioPeriodo, fimPeriodo, paginacao, SEM_CACHE);
 		}
 	}
@@ -138,6 +151,7 @@ public class NoticiaController {
 					.ok(noticiaService.criarPaginacao(paginacao,
 							noticiaService.listarPorSinopse(site, inicioPeriodo, fimPeriodo, palavra, paginacao, cache)));
 		} catch (RedisConnectionFailureException ex) {
+			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.buscarPorSinopse(palavra, site, inicioPeriodo, fimPeriodo, paginacao, SEM_CACHE);
 		}
 	}
@@ -153,6 +167,7 @@ public class NoticiaController {
 					.ok(noticiaService.criarPaginacao(paginacao,
 							noticiaService.listarPorConteudo(site, inicioPeriodo, fimPeriodo, palavra, paginacao, cache)));
 		} catch (RedisConnectionFailureException ex) {
+			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.buscarPorConteudo(palavra, site, inicioPeriodo, fimPeriodo, paginacao, SEM_CACHE);
 		}
 	}
@@ -167,6 +182,7 @@ public class NoticiaController {
 			return ResponseEntity.ok(noticiaService.criarPaginacao(paginacao,
 					noticiaService.listarPorDataPublicacao(inicioPeriodo, fimPeriodo, paginacao, cache)));
 		} catch (RedisConnectionFailureException ex) {
+			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.listarPorData(inicioPeriodo, fimPeriodo, paginacao, SEM_CACHE);
 		}
 	}
@@ -179,6 +195,7 @@ public class NoticiaController {
 			return ResponseEntity.ok(noticiaService.criarPaginacao(paginacao,
 					noticiaService.listarMaisLidasDaSemana(paginacao, cache)));
 		} catch (RedisConnectionFailureException ex) {
+			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.listarPorMaisLidas(paginacao, SEM_CACHE);
 		}
 	}
@@ -191,6 +208,7 @@ public class NoticiaController {
 			return ResponseEntity.ok(noticiaService.criarPaginacao(paginacao,
 					noticiaService.listarPorPrincipais(paginacao, cache)));
 		} catch (RedisConnectionFailureException ex) {
+			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.listarPorPrincipais(paginacao, SEM_CACHE);
 		}
 	}

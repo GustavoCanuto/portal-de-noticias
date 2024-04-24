@@ -1,5 +1,6 @@
 import { percorrerNoticias } from "./buscador/percorrerNoticias.js"; 
 import puppeteer from 'puppeteer';
+import logger from "./log.js";
 
 let pageInstance;
 const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/58.0.3029.110 ';
@@ -7,7 +8,7 @@ const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/58.0.3029.11
 export default async function fetchData(browserInstance) {
 
   if (!browserInstance) {
-    console.log("Navegador não inicializado.");
+    logger.info("Navegador não inicializado.");
     return;
   }
 
@@ -22,9 +23,9 @@ export default async function fetchData(browserInstance) {
     await percorrerNoticias(pageInstance);
 
   } catch (error) {
-    console.error("\nErro ao buscar os dados:", error+"\n");
+    logger.error("\nErro ao buscar os dados:"+ error+"\n");
     setTimeout(async () => {
-      console.log("\nTentando novamente...\n");
+      logger.info("\nTentando novamente...\n");
       await browserInstance.close();
       browserInstance = await puppeteer.launch({ timeout: 80000 });
       await fetchData(browserInstance);

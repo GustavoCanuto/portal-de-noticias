@@ -25,7 +25,7 @@ import br.com.magnasistemas.apimagnaspnews.repository.TagRepository;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-public class TagControllerTest {
+class TagControllerTest {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
