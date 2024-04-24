@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import br.com.magnasistemas.apimagnaspnewsusuarios.dto.UserRegistrationRecord;
+import br.com.magnasistemas.apimagnaspnewsusuarios.enuns.Role;
 import br.com.magnasistemas.apimagnaspnewsusuarios.validacoes.cadastroUsuario.ValidarAcessoRole;
 import br.com.magnasistemas.apimagnaspnewsusuarios.validacoes.cadastroUsuario.ValidarCadastroUsuario;
 import jakarta.ws.rs.core.Response;
@@ -41,7 +42,7 @@ public class KeycloakUserServiceImpl implements KeycloakUserService{
 
         UserRepresentation user=new UserRepresentation();
         
-        List<String> roles = userRegistrationRecord.roles();
+        List<Role> roles = userRegistrationRecord.roles();
         
         validadoresCadastro.forEach(v -> v.validar(roles));
         
@@ -74,8 +75,8 @@ public class KeycloakUserServiceImpl implements KeycloakUserService{
             
             
             if (roles != null && !roles.isEmpty()) {
-            for (String roleName : roles) {
-            	 RoleRepresentation representation = rolesResource.get(roleName).toRepresentation();
+            for (Role roleName : roles) {
+            	 RoleRepresentation representation = rolesResource.get(roleName.name()).toRepresentation();
                  userResource.roles().realmLevel().add(Collections.singletonList(representation));
             }
             }  
