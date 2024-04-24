@@ -16,10 +16,10 @@ import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import br.com.magnasistemas.apimagnaspnewsusuarios.dto.UserRegistrationRecord;
 import br.com.magnasistemas.apimagnaspnewsusuarios.enuns.Role;
-import br.com.magnasistemas.apimagnaspnewsusuarios.validacoes.cadastroUsuario.ValidarAcessoRole;
 import br.com.magnasistemas.apimagnaspnewsusuarios.validacoes.cadastroUsuario.ValidarCadastroUsuario;
 import jakarta.ws.rs.core.Response;
 
@@ -80,11 +80,18 @@ public class KeycloakUserServiceImpl implements KeycloakUserService{
                  userResource.roles().realmLevel().add(Collections.singletonList(representation));
             }
             }  
+            
+            List<UserRepresentation> representationList = usersResource.searchByUsername(userRegistrationRecord.username(), true);
+            if(!CollectionUtils.isEmpty(representationList)){
+                UserRepresentation userRepresentation1 = representationList.stream().filter(userRepresentation -> Objects.equals(false, userRepresentation.isEmailVerified())).findFirst().orElse(null);
+                assert userRepresentation1 != null;
+ 
+                emailVerification(userRepresentation1.getId());
+            }
+
 
             return  userRegistrationRecord;
         }
-
-//        response.readEntity()
 
         return null;
     }
@@ -124,6 +131,7 @@ public class KeycloakUserServiceImpl implements KeycloakUserService{
         UsersResource usersResource = getUsersResource();
         usersResource.get(userId).sendVerifyEmail();
     }
+
 
     public UserResource getUserResource(String userId){
         UsersResource usersResource = getUsersResource();
