@@ -13,10 +13,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/noticia",
+					"raw": "http://{{apiFrontEnd}}/noticia",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"noticia"
@@ -31,28 +31,27 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/noticia/tag/Trem?site=CNN&inicioPeriodo=1997-02-22T16:00:00&fimPeriodo=2024-02-22T16:00:00",
+					"raw": "http://{{apiFrontEnd}}/noticia/tag?nomeTag=São Paulo&inicioPeriodo=1997-02-22T12:00:00&fimPeriodo=2025-02-22T12:00:00",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"noticia",
-						"tag",
-						"Trem"
+						"tag"
 					],
 					"query": [
 						{
-							"key": "site",
-							"value": "CNN"
+							"key": "nomeTag",
+							"value": "São Paulo"
 						},
 						{
 							"key": "inicioPeriodo",
-							"value": "1997-02-22T16:00:00"
+							"value": "1997-02-22T12:00:00"
 						},
 						{
 							"key": "fimPeriodo",
-							"value": "2024-02-22T16:00:00"
+							"value": "2025-02-22T12:00:00"
 						}
 					]
 				}
@@ -65,10 +64,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/noticia/categoria?categorias=Categoria1,Categoria2",
+					"raw": "http://{{apiFrontEnd}}/noticia/categoria?categorias=Categoria1,Categoria2",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"noticia",
@@ -87,13 +86,23 @@
 		{
 			"name": "Listar Previa Por site",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/noticia/site/g1?inicioPeriodo=2024-02-22T12:00:00&fimPeriodo=2024-02-22T12:00:00",
+					"raw": "http://{{apiFrontEnd}}/noticia/site/g1?inicioPeriodo=1997-02-22T12:00:00&fimPeriodo=2025-02-22T12:00:00",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"noticia",
@@ -103,11 +112,11 @@
 					"query": [
 						{
 							"key": "inicioPeriodo",
-							"value": "2024-02-22T12:00:00"
+							"value": "1997-02-22T12:00:00"
 						},
 						{
 							"key": "fimPeriodo",
-							"value": "2024-02-22T12:00:00"
+							"value": "2025-02-22T12:00:00"
 						}
 					]
 				}
@@ -120,10 +129,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/noticia/sinopse?palavra=t",
+					"raw": "http://{{apiFrontEnd}}/noticia/sinopse?palavra=t&site=g1",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"noticia",
@@ -133,6 +142,10 @@
 						{
 							"key": "palavra",
 							"value": "t"
+						},
+						{
+							"key": "site",
+							"value": "g1"
 						}
 					]
 				}
@@ -145,10 +158,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/noticia/conteudo?palavra=p&inicioPeriodo=1997-02-22T12:00:00&fimPeriodo=2024-02-22T12:00:00",
+					"raw": "http://{{apiFrontEnd}}/noticia/conteudo?palavra=p&inicioPeriodo=1997-02-22T12:00:00&fimPeriodo=2025-02-22T12:00:00",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"noticia",
@@ -165,7 +178,7 @@
 						},
 						{
 							"key": "fimPeriodo",
-							"value": "2024-02-22T12:00:00"
+							"value": "2025-02-22T12:00:00"
 						}
 					]
 				}
@@ -178,10 +191,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/noticia/titulo?palavra=t&site=g1&inicioPeriodo=2023-02-20T12:00:00&fimPeriodo=2023-02-20T12:00:00",
+					"raw": "http://{{apiFrontEnd}}/noticia/titulo?palavra=t&site=cnn&inicioPeriodo=2023-02-20T12:00:00&fimPeriodo=2023-02-20T12:00:00",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"noticia",
@@ -194,7 +207,7 @@
 						},
 						{
 							"key": "site",
-							"value": "g1"
+							"value": "cnn"
 						},
 						{
 							"key": "inicioPeriodo",
@@ -215,10 +228,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/noticia/data-publicacao",
+					"raw": "http://{{apiFrontEnd}}/noticia/data-publicacao",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"noticia",
@@ -234,10 +247,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/noticia/mais-lidas",
+					"raw": "http://{{apiFrontEnd}}/noticia/mais-lidas",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"noticia",
@@ -253,10 +266,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/noticia/principais",
+					"raw": "http://{{apiFrontEnd}}/noticia/principais",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"noticia",
@@ -272,10 +285,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/noticia/1",
+					"raw": "http://{{apiFrontEnd}}/noticia/1",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"noticia",
@@ -291,16 +304,21 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/noticia/Texto Padrao de Titulo sem Tag ou Categoria nele/UOL/2024-03-03T16:59:00",
+					"raw": "http://{{apiFrontEnd}}/noticia/cnn/2024-03-03T16:59:00?titulo=Texto Padrao de Titulo sem Tag ou Categoria nele",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"noticia",
-						"Texto Padrao de Titulo sem Tag ou Categoria nele",
-						"UOL",
+						"cnn",
 						"2024-03-03T16:59:00"
+					],
+					"query": [
+						{
+							"key": "titulo",
+							"value": "Texto Padrao de Titulo sem Tag ou Categoria nele"
+						}
 					]
 				}
 			},

@@ -17,6 +17,7 @@ public class ValidarAcessoRole implements ValidarUsuario {
 
 		System.out.println(site);
 
+		if(site != null) {
 			if (verificarRole.hasRole("ADMIN") || verificarRole.hasRole("EDITOR")) {
 				System.out.println("não é admin nem editor");
 				return;}
@@ -27,5 +28,6 @@ public class ValidarAcessoRole implements ValidarUsuario {
 				throw new ValidacaoException("Seu Usuario não tem permisão para acessar conteudo do " + site);
 			}
 		
+		}
 	}
 }

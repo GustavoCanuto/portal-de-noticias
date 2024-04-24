@@ -13,10 +13,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/tag",
+					"raw": "http://{{apiFrontEnd}}/tag",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"tag"
@@ -31,10 +31,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{apiFrontEndl}}/tag/",
+					"raw": "http://{{apiFrontEnd}}/tag/",
 					"protocol": "http",
 					"host": [
-						"{{apiFrontEndl}}"
+						"{{apiFrontEnd}}"
 					],
 					"path": [
 						"tag",

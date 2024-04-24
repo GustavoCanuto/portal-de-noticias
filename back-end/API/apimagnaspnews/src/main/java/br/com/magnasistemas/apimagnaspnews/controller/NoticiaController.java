@@ -44,7 +44,9 @@ public class NoticiaController {
 	@GetMapping("/{id}")
 	public ResponseEntity<NoticiaCompletaDto> detalhar(@PathVariable Long id, String cache) {
 		try {
-			return ResponseEntity.ok(noticiaService.detalharNoticia(id, cache));
+			var noticia = noticiaService.detalharNoticia(id, cache);
+			validadoresAcesso.forEach(v -> v.validar(noticia.getSiteBuscado()));
+			return ResponseEntity.ok(noticia);
 		} catch (RedisConnectionFailureException ex) {
 			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
 			return this.detalhar(id, SEM_CACHE);
@@ -58,6 +60,7 @@ public class NoticiaController {
 		    @RequestParam(required = true) String titulo,
 			String cache) {
 		try {
+			validadoresAcesso.forEach(v -> v.validar(site));
 			return ResponseEntity.ok(noticiaService.detalharPorLinkNoticia(titulo,site,dataPublicacao, cache));
 		} catch (RedisConnectionFailureException ex) {
 			 logger.error(MESSANGEM_ERRO_REDIS, ex.getMessage());
@@ -105,6 +108,7 @@ public class NoticiaController {
 			@RequestParam List<String> categorias, @PageableDefault(size = 10) Pageable paginacao, String cache) {
 
 		try {
+			validadoresAcesso.forEach(v -> v.validar(site));
 			return ResponseEntity
 					.ok(noticiaService.criarPaginacao(paginacao,
 							noticiaService.buscarPorCategoria(site, inicioPeriodo, fimPeriodo, categorias, paginacao, cache)));
@@ -122,6 +126,7 @@ public class NoticiaController {
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fimPeriodo,
 			@PageableDefault(size = 10) Pageable paginacao, String cache) {
 		try {
+			validadoresAcesso.forEach(v -> v.validar(site));
 			return ResponseEntity
 					.ok(noticiaService.criarPaginacao(paginacao,
 							noticiaService.buscarPorNomeTag(site, inicioPeriodo, fimPeriodo, nomeTag, paginacao, cache)));
@@ -139,6 +144,7 @@ public class NoticiaController {
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fimPeriodo,
 			@PageableDefault(size = 10) Pageable paginacao, String cache) {
 		try {
+			validadoresAcesso.forEach(v -> v.validar(site));
 			return ResponseEntity
 					.ok(noticiaService.criarPaginacao(paginacao,
 							noticiaService.listarPorTitulo(site, inicioPeriodo, fimPeriodo, palavra, paginacao, cache)));
@@ -155,6 +161,7 @@ public class NoticiaController {
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fimPeriodo,
 			@PageableDefault(size = 10) Pageable paginacao, String cache) {
 		try {
+			validadoresAcesso.forEach(v -> v.validar(site));
 			return ResponseEntity
 					.ok(noticiaService.criarPaginacao(paginacao,
 							noticiaService.listarPorSinopse(site, inicioPeriodo, fimPeriodo, palavra, paginacao, cache)));
@@ -171,6 +178,7 @@ public class NoticiaController {
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fimPeriodo,
 			@PageableDefault(size = 10) Pageable paginacao, String cache) {
 		try {
+			validadoresAcesso.forEach(v -> v.validar(site));
 			return ResponseEntity
 					.ok(noticiaService.criarPaginacao(paginacao,
 							noticiaService.listarPorConteudo(site, inicioPeriodo, fimPeriodo, palavra, paginacao, cache)));
