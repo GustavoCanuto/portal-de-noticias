@@ -1,0 +1,46 @@
+<app-cabecalho [titulo]="noticia.categoria ? noticia.categoria : 'MagnaSp News'"></app-cabecalho>
+<section class="pagina__noticia">
+  <app-loading *ngIf="loadingInicial" [loadingPrincipal]="true"></app-loading>
+  <article class="noticia" *ngIf="noticiaEncontrada">
+    <h1 class="titulo__noticia" data-test="tituloNoticia">{{ noticia.titulo }}</h1>
+    <p class="sinopse" *ngIf="noticia.sinopse">{{ noticia.sinopse }}</p>
+    <div class="dados__noticia">
+      <p class="autoria" [innerHTML]="autoriaInjetavel"></p>
+      <div class="dados__publicacao">
+        <p class="data__publicacao">Publicado em {{ noticia.dataPublicacao | date : 'dd/MM/yyyy \'às\' HH:mm'}}</p>
+        <p class="data__modificacao" *ngIf="noticia.dataModificada">| Atualizado em {{ noticia.dataModificada | date :
+          'dd/MM/yyyy \'às\' HH:mm'}}</p>
+      </div>
+    </div>
+    <div class="conteudo__noticia" [innerHTML]="conteudoInjetavel" data-test="conteudoNoticia"></div>
+    <div class="espaco__tags" *ngIf="noticia.tags.length > 0">
+      <div class="espaco__titulo">
+        <div class="icone__tags"></div>
+        <h2 class="titulo__tags">TAGS</h2>
+      </div>
+      <ul class="tag__list">
+        <li class="tag__item" *ngFor="let tag of noticia.tags" (click)="redirecionarTelaDeBuscaPorTag(tag.nome)">
+          {{ tag.nome }}
+        </li>
+      </ul>
+    </div>
+    <div class="espaco__link__noticia__oficial" *ngIf="noticia.linkDaNoticiaOficial" data-test="linkNoticia">
+      <p>Você pode encontrar a matéria oficial em</p>
+      <a href="{{ noticia.linkDaNoticiaOficial }}">{{
+        linkPortal
+        }}</a>
+    </div>
+  </article>
+  <div class="noticias__relacionadas" *ngIf="noticiasRelacionadas.length > 0 || tentarNovamentePrevias">
+    <h2 class="titulo__noticias__relacionadas">Notícias Relacionadas</h2>
+    <div class="resultado__busca">
+      <app-previa-noticia *ngFor="let previa of noticiasRelacionadas" [previa]="previa"></app-previa-noticia>
+    </div>
+    <app-loading *ngIf="loading" [loadingPrincipal]="false"></app-loading>
+    <app-acabou-conteudo *ngIf="!possuiMaisNoticias"></app-acabou-conteudo>
+    <app-btn-ver-mais *ngIf="possuiMaisNoticias && !tentarNovamentePrevias" (click)="carregarMaisNoticias()"></app-btn-ver-mais>
+  </div>
+  <app-tempo-excedido [classePrevias]="tentarNovamentePrevias" *ngIf="tentarNovamenteNoticia || tentarNovamentePrevias"
+    (tentarNovamente)="tentarNovamenteNoticia ? recarregarNoticia() : recarregarPrevias()">
+  </app-tempo-excedido>
+</section>

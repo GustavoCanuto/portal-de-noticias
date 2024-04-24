@@ -1,0 +1,97 @@
+.not__found {
+  align-items: center;
+  background-color: var(--cor-fundo);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px - 50px - 100px);
+  min-height: 400px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mensagem__erro {
+  align-items: center;
+  display: flex;
+  gap: 40px;
+  height: 400px;
+  max-width: 98%;
+  width: 600px;
+}
+
+.icone__nao__encontrado {
+  content: url(../../../assets/images/icons/icone-nao-encontrado.svg);
+  background-size: auto;
+  background-repeat: no-repeat;
+  height: 60%;
+  width: auto;
+}
+
+.text {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  height: 100%;
+}
+
+.text h1 {
+  color: var(--cor-letra-preta);
+  font-family: var(--fonte-padrao-portal);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 44px;
+  text-align: center;
+}
+
+.text p {
+  color: var(--cor-letra-preta);
+  font-family: var(--fonte-padrao-portal);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 30px;
+  text-align: center;
+}
+
+.botao__voltar_tela_inicial {
+  background-color: var(--cor-padrao);
+  border-radius: 8px;
+  color: var(--cor-letra-branca);
+  font-family: var(--fonte-padrao-portal);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  margin: 20px;
+  padding: 12px;
+  width: 280px;
+}
+
+@media (max-width: 430px) {
+  :host {
+    --largura-tela: 100%;
+  }
+
+  .not__found {
+    height: calc(100vh - 80px - 100px);
+  }
+
+  .mensagem__erro {
+    height: 50%;
+    gap: 15px;
+    width: 96%;
+  }
+
+  .text h1 {
+    font-size: 40px;
+  }
+
+  .text p {
+    font-size: 25px;
+  }
+
+  .icone__nao__encontrado {
+    height: 40%;
+  }
+}

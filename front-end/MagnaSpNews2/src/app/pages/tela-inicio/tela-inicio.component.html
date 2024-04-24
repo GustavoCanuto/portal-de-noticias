@@ -1,0 +1,22 @@
+<app-cabecalho [titulo]="'MagnaSp News'"></app-cabecalho>
+<section class="tela__inicio">
+  <div class="conteudo">
+    <app-loading *ngIf="loadingInicial" [loadingPrincipal]="true"></app-loading>
+    <app-principais-noticias [previas]="principaisNoticias"
+      *ngIf="principaisNoticias && principaisNoticias.length >= 3"></app-principais-noticias>
+    <app-carrossel-noticias [tituloCarrosel]="'Últimas Notícias'" [previas]="ultimasNoticias"
+      *ngIf="ultimasNoticias && ultimasNoticias.length >= 3"></app-carrossel-noticias>
+    <app-carrossel-noticias [tituloCarrosel]="'Mais Lidas'" [previas]="maisLidas"
+      *ngIf="maisLidas && maisLidas.length >= 3"></app-carrossel-noticias>
+    <div class="previas__noticias">
+      <app-previa-noticia *ngFor="let previa of previasCards" [previa]="previa"></app-previa-noticia>
+    </div>
+    <app-tempo-excedido [classePrevias]="tentarNovamentePrevias"
+      *ngIf="tentarNovamenteTelaCompleta || tentarNovamentePrevias"
+      (tentarNovamente)="tentarNovamenteTelaCompleta ? recarregarTelaCompleta() : recarregarPrevias()">
+    </app-tempo-excedido>
+  </div>
+  <app-loading *ngIf="loading" [loadingPrincipal]="false"></app-loading>
+  <app-acabou-conteudo  *ngIf="!possuiMaisNoticias && previasCards.length > 0" ></app-acabou-conteudo>
+  <app-btn-ver-mais *ngIf="possuiMaisNoticias && previasCards.length > 0" (click)="verMaisNoticias()"></app-btn-ver-mais>
+</section>

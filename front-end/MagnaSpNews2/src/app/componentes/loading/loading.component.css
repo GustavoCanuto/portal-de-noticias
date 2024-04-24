@@ -1,0 +1,11 @@
+.espaco__loading {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.icone__loading__principal {
+    height: 8vh;
+    margin: 100px 0 100px;
+}

@@ -1,0 +1,20 @@
+<div class="principais__noticias">
+  <h2 class="titulo">Principais Notícias</h2>
+  <div class="noticias">
+    <div class="noticia__principal" (click)="exibirNoticia(previas[0])" data-test="noticiaPrincipal">
+      <p class="titulo__noticia__principal">{{ previas[0].titulo | limitarCaracteres: 100}}</p>
+      <div class="imagem__noticia__principal" [innerHTML]="imagensInjetaveis[0]"></div>
+      <div class="degrade-bottom"></div>
+    </div>
+    <div class="noticias__secundarias">
+      <div class="noticia__secundaria" (click)="exibirNoticia(previas[1])" data-test="noticiaPrincipal">  
+        <div class="titulo__noticia__secundaria">{{previas[1].titulo | limitarCaracteres: 120}}</div>
+        <div class="imagem__noticia__secundaria" [innerHTML]="imagensInjetaveis[1]"></div>
+      </div>
+      <div class="noticia__secundaria" (click)="exibirNoticia(previas[2])" data-test="noticiaPrincipal">
+        <div class="titulo__noticia__secundaria">{{previas[2].titulo | limitarCaracteres: 120}}</div>
+        <div class="imagem__noticia__secundaria" [innerHTML]="imagensInjetaveis[2]"></div>
+      </div>
+    </div>
+  </div>
+</div>

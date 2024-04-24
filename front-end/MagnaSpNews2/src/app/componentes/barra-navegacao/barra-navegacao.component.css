@@ -1,0 +1,42 @@
+.barra__navegacao {
+  background-color: var(--cor-fundo);
+  height: 50px;
+  width: 100%;
+}
+
+.filtro__sites {
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.barra__navegacao button {
+  font-family: var(--fonte-padrao-portal);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  color: var(--cor-letra-preta);
+}
+
+.contratar__assinatura {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.login {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-mdc-list-item, .mat-mdc-list-option {
+  width: auto;
+}
+
+
