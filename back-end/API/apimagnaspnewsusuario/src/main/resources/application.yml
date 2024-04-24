@@ -12,7 +12,7 @@ spring:
           google:
             client-id: 4619644464-o1o6v14rlpg8k50mlhhm91re28n13ubl.apps.googleusercontent.com
             client-secret: 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
-            scope: https://www.googleapis.com/auth/userinfo.email
+            scope: https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile
             redirect-uri: http://localhost:8083/login/callback
             client-name: Google
             provider: google
