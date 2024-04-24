@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: api_magnaspnews
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/apimagnaspnews
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+      client:
+        registration:
+          google:
+            client-id: 4619644464-o1o6v14rlpg8k50mlhhm91re28n13ubl.apps.googleusercontent.com
+            client-secret: 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
+            scope: https://www.googleapis.com/auth/userinfo.email
+            redirect-uri: http://localhost:8083/login/callback
+            client-name: Google
+            provider: google
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+            issuer-uri: https://accounts.google.com
+          keycloak:
+            token-uri: http://localhost:8080/realms/apimagnaspnews/protocol/openid-connect/token
+            
+keycloak:
+  realm: apimagnaspnews
+  domain: localhost:8080
+  adminClientId: admin-cli
+  adminClientSecret: 8CDYnXo6guKKNiZzCPUJxOT0YTaN6EEU
+  client: authenticationClientId
+  urls:
+    auth: http://${keycloak.domain}
+
+server:
+  port: 8083

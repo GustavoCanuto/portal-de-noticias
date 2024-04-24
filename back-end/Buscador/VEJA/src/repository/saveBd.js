@@ -3,7 +3,7 @@ import logger from "../log.js";
 
  async function cadastrarNoticia(pageContent) {
   try {
-    const response = await fetch('http://localhost:8080/noticia', {
+    const response = await fetch('http://localhost:8082/noticia', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
