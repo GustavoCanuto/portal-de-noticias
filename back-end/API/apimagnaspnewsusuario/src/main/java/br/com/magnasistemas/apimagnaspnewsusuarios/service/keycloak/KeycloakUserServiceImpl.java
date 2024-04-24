@@ -13,10 +13,13 @@ import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import br.com.magnasistemas.apimagnaspnewsusuarios.dto.UserRegistrationRecord;
+import br.com.magnasistemas.apimagnaspnewsusuarios.validacoes.cadastroUsuario.ValidarAcessoRole;
+import br.com.magnasistemas.apimagnaspnewsusuarios.validacoes.cadastroUsuario.ValidarCadastroUsuario;
 import jakarta.ws.rs.core.Response;
 
 @Service
@@ -26,6 +29,9 @@ public class KeycloakUserServiceImpl implements KeycloakUserService{
     private String realm;
     private Keycloak keycloak;
 
+	@Autowired
+	private List<ValidarCadastroUsuario> validadoresCadastro;
+	
     public KeycloakUserServiceImpl(Keycloak keycloak) {
         this.keycloak = keycloak;
     }
@@ -34,6 +40,11 @@ public class KeycloakUserServiceImpl implements KeycloakUserService{
     public UserRegistrationRecord createUser(UserRegistrationRecord userRegistrationRecord) {
 
         UserRepresentation user=new UserRepresentation();
+        
+        List<String> roles = userRegistrationRecord.roles();
+        
+        validadoresCadastro.forEach(v -> v.validar(roles));
+        
         user.setEnabled(true);
         user.setUsername(userRegistrationRecord.username());
         user.setEmail(userRegistrationRecord.email());
@@ -61,7 +72,7 @@ public class KeycloakUserServiceImpl implements KeycloakUserService{
         	UserResource userResource = getUserResource(userId);
             RolesResource rolesResource = getRolesResource();
             
-            List<String> roles = userRegistrationRecord.roles();
+            
             if (roles != null && !roles.isEmpty()) {
             for (String roleName : roles) {
             	 RoleRepresentation representation = rolesResource.get(roleName).toRepresentation();

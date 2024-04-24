@@ -37,3 +37,6 @@ keycloak:
 
 server:
   port: 8083
+  error:
+    include-stacktrace: never
+
