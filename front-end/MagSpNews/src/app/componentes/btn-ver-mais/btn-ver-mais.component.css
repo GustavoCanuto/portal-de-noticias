@@ -1,0 +1,11 @@
+.botao__ver__mais {
+    background-color: var(--cor-padrao);
+    border-radius: 8px;
+    color: var(--cor-letra-branca);
+    font-family: var(--fonte-padrao-portal);
+    font-weight: 400;
+    font-style: normal;
+    margin: 20px;
+    padding: 12px;
+    width: 200px;
+}

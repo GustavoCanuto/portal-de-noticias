@@ -1,0 +1,44 @@
+<app-cabecalho [titulo]="parametroBusca != 'categoria' ? 'MagnaSp News' : parametroEscolhido"></app-cabecalho>
+<section class="tela__busca">
+  <div class="descricao__busca" *ngIf="parametroBusca == 'portal'">
+    <p>
+      O conteúdo de todas as notícias abaixo é obtido diretamente do site do
+    </p>
+    <a href="{{ linkPortal }}">{{ linkResumido }}</a>
+  </div>
+  <div class="descricao__busca" *ngIf="parametroBusca == 'palavra' || parametroBusca == 'tag'">
+    <p>Você buscou por</p>
+    <p class="termo__buscado">{{ parametroEscolhido }}</p>
+  </div>
+  <div class="espaco__filtro" *ngIf="!tentarNovamente">
+    <div class="ver__filtro__selecionado">{{filtroSelecionado}}</div>
+    <div class="botao__filtros">
+      <input type="checkbox" id="filtro" [(ngModel)]="mostrarFiltros" />
+      <label for="filtro">Filtrar Por</label>
+      <label for="filtro" class="icone__mostrar__filtros"></label>
+      <div *ngIf="mostrarFiltros" class="opcoes__filtro">
+        <ul>
+          <li class="filtro" *ngFor="let filtro of filtros" (click)="selecionarFiltro(filtro); mostrarFiltros = false"
+            [ngClass]="{filtro__selecionado : filtro == filtroSelecionado }">
+            {{ filtro }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <app-loading *ngIf="loadingInicial" [loadingPrincipal]="true"></app-loading>
+  <div class="cards" *ngIf="resultadoBusca.length > 0">
+    <div class="resultado__busca" data-test="resultadoBusca">
+      <app-previa-noticia *ngFor="let previa of resultadoBusca" [previa]="previa"></app-previa-noticia>
+    </div>
+    <app-loading *ngIf="loading" [loadingPrincipal]="false"></app-loading>
+    <app-acabou-conteudo *ngIf="!possuiMaisNoticias"></app-acabou-conteudo>
+    <app-btn-ver-mais *ngIf="possuiMaisNoticias && !tentarNovamente" (click)="carregarMaisNoticias()"></app-btn-ver-mais>
+  </div>
+  <div class="sem__resposta" *ngIf="resultadoBusca.length == 0 && !loadingInicial && !tentarNovamente && !siteForaDoAr">
+    <div class="icone__nao__encontrado"></div>
+    <div class="sem__resposta__mensagem">Não há resultados para sua busca.</div>
+  </div>
+  <app-tempo-excedido *ngIf="tentarNovamente" (tentarNovamente)="recarregar()"> </app-tempo-excedido>
+  <app-site-fora-do-ar *ngIf="siteForaDoAr"></app-site-fora-do-ar>
+</section>

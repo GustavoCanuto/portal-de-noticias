@@ -1,0 +1,18 @@
+<mat-toolbar class="barra__navegacao">
+  <mat-nav-list class="filtro__sites">
+    @for (portal of portais; track portal) {
+    <button mat-button (click)="redirecionar(portal)" (mousedown)="buscarSiteEmNovaAba(portal, $event)"
+      data-test="portal">{{portal}}</button>
+    }
+  </mat-nav-list>
+  <span class="example-spacer"></span>
+  <!-- <mat-nav-list class="contratar__assinatura">
+    <mat-list-item>
+      <button mat-button>Assine Já</button>
+    </mat-list-item>
+    <mat-list-item>
+      <button class="login">
+        <mat-icon>account_circle</mat-icon>Login</button>
+    </mat-list-item>
+  </mat-nav-list> -->
+</mat-toolbar>

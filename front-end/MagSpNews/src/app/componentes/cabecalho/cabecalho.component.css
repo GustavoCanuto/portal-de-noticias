@@ -1,0 +1,266 @@
+.cabecalho {
+  background-color: var(--cor-padrao);
+  height: 80px;
+  width: 100%;
+}
+
+.conteudo__cabecalho {
+  display: grid;
+  grid-template-areas: ". menu logo . titulo . busca .";
+  grid-template-columns: 15px 60px 110px auto 500px auto 200px 15px;
+  height: 100%;
+  width: 100%;
+}
+
+.cabecalho__fixo {
+  top: 0;
+  position: fixed;
+  z-index: 10;
+}
+
+.menu {
+  align-items: center;
+  display: flex;
+  grid-area: menu;
+  justify-content: baseline;
+}
+
+.icone__menu {
+  background-size: auto;
+  background-repeat: no-repeat;
+  content: url(../../../assets/images/icons/icone-menu.svg);
+  cursor: pointer;
+  height: 60%;
+}
+
+.logo{
+  background-image: url(../../../assets/images/logo-cabecalho.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  grid-area: logo;
+  width: 100%;
+}
+
+.titulo {
+  align-items: center;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  font-family: var(--fonte-padrao-portal);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+  grid-area: titulo;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.campo__busca {
+  display: inline-block;
+  grid-area: busca;
+  position: relative;
+  width: 100%;
+}
+
+.campo__busca__desktop{
+  align-items: center;
+  display: flex;
+  justify-content: end;
+}
+
+.campo__busca__desktop input {
+  background-color: var(--cor-fundo);
+  border: none;
+  border-radius: 12px;
+  margin-top: 20px;
+  padding: 10px;
+  text-decoration: none;
+  width: calc(100% - 20px);
+}
+
+.icone__campo__busca {
+  background-size: auto;
+  background-repeat: no-repeat;
+  content: url(../../../assets/images/icons/icone-busca-preto.svg);
+  cursor: pointer;
+  height: 25px;
+  position: absolute;
+  right: 5px;
+  bottom: 32px;
+  transform: scaleX(-1);
+}
+
+.campo__busca__mobile {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.campo__busca__autocomplete{
+  display: inline-block;
+  grid-area: busca;
+  position: relative;
+  width: 100%;
+}
+
+.icone__campo__busca__mobile {
+  background-size: auto;
+  background-repeat: no-repeat;
+  content: url(../../../assets/images/icons/icone-busca-branco.svg);
+  display: none;
+  height: 25px;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+}
+
+.cabecalho__barra__pesquisa{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.campo__busca__mobile input {
+  height: 40px;
+  display: block;
+  width: 90%;
+  background-color: var(--cor-fundo);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.icone__fechar__campo {
+  background-size: auto;
+  background-repeat: no-repeat;
+  content: url(../../../assets/images/icons/icone-fechar.svg);
+  display: block;
+  transform: scaleX(-1);
+  height: 25px;
+  cursor: pointer;
+  position: absolute;
+  right: 60px;
+}
+
+.opcoes__autocomplete {
+  position: absolute;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  width: 100%;
+  z-index: 5;
+}
+
+.opcoes__autocomplete li {
+  color: var(--cor-letra-preta);
+  font-family: var(--fonte-padrao-portal);
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 18px;
+  padding: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  width: calc(100% - 20px);
+}
+
+.opcoes__autocomplete li:hover {
+  background-color: #ddd;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-track:active {
+  background-color: #ddd;
+}
+
+.campoOculto{
+  display: none;
+}
+
+@media (max-width: 610px) {
+  .conteudo__cabecalho {
+    grid-template-areas: ". menu logo . titulo . busca";
+    grid-template-columns: 15px 50px 60px auto 200px auto 50px;
+    overflow: hidden;
+  }
+
+  .titulo {
+    font-size: 26px;
+  }
+
+  .campo__busca {
+    align-items: center;
+    display: flex;
+    justify-content: end;
+  }
+
+  .icone__campo__busca__mobile {
+    display: block;
+  }
+
+  .icone__fechar__campo {
+    right: 20px;
+  }
+
+  .opcoes__autocomplete {
+    margin-top: 1px;
+    margin-left: 4%;
+    width: 92%;
+  }
+}
+
+@media (min-width: 611px) and (max-width: 1024px) {
+  .conteudo__cabecalho {
+    grid-template-columns: 15px 60px 60px auto 400px auto 60px 15px;
+  }
+
+  .titulo {
+    font-size: 40px;
+  }
+
+  .campo__busca {
+    align-items: center;
+    display: flex;
+    justify-content: end;
+  }
+
+  .icone__campo__busca__mobile {
+    display: block;
+  }
+
+  .opcoes__autocomplete {
+    margin-top: 1px;
+    margin-left: 4%;
+    width: 92%;
+  }
+
+  .icone__fechar__campo {
+    right: 50px;
+  }
+}

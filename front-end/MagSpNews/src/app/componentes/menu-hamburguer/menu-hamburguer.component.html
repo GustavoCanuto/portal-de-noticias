@@ -1,0 +1,35 @@
+<nav class="menu__hamburguer" data-test="menu">
+  <div class="filtros">
+    <button class="botao__voltar" (click)="fechar()" data-test="fecharMenu">
+      <div class="icone__voltar"></div>
+      <div class="label__voltar">Voltar</div>
+    </button>
+    <ul class="categorias__list">
+      <li
+        class="categoria__item"
+        *ngFor="let categoria of categorias"
+        (click)="buscarCategoria(categoria)"
+        data-test="categoria"
+      >
+        {{ categoria }}
+      </li>
+      <div class="linha"></div>
+    </ul>
+    <ul class="portais__list">
+      <li
+        class="portais__item"
+        *ngFor="let portal of portais"
+        (click)="buscarPortal(portal)"
+      >
+        {{ portal }}
+      </li>
+      <div class="linha"></div>
+    </ul>
+    <!-- <ul class="cadastro__list">
+      <li class="cadastro__item">Assine Já</li>
+      <li class="cadastro__item">Login</li>
+      <div class="linha"></div>
+    </ul> -->
+    <div class="sobre__nos" routerLink="/sobre-nos" data-test="sobreNos">Sobre nós</div>
+  </div>
+</nav>

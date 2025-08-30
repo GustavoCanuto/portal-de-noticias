@@ -1,0 +1,11 @@
+<div class="previa__noticia" (click)="exibirNoticia()" data-test="cardNoticia">
+  <div class="imagem__capa" [innerHTML]="imagemCapaInjetavel"></div>
+  <div class="info__previa">
+    <button mat-raised-button [class]="'site__buscado site__' + previa.siteBuscado" (click)="buscarSite()"
+      (mousedown)="buscarSiteEmNovaAba($event)" data-test="iconePortal">{{previa.siteBuscado}}</button>
+    <div class="titulo" [ngClass]="{titulo__sem__sinopse : previa.sinopse == null}" data-test="tituloNoticiaPrevia">{{previa.titulo}}</div>
+    <div class="sinopse" [ngClass]="{sinopse__null : previa.sinopse == null}">{{previa.sinopse | limitarCaracteres:
+      limiteDeCaracteres}}</div>
+  </div>
+</div>
+<div class="linha"></div>

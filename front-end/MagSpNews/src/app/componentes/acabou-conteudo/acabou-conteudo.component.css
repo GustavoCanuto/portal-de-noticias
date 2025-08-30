@@ -1,0 +1,10 @@
+.nao__ha__conteudo {
+    color: var(--cor-padrao);
+    font-family: var(--fonte-padrao-portal);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22px;
+    text-align: center;
+    margin: 20px 0 20px;
+    width: 100%;
+}

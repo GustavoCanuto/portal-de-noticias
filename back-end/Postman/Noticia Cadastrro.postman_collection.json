@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "104c5141-8b5b-495e-9d60-a97b6a9b1b0d",
+		"name": "Noticia Cadastrro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29089140",
+		"_collection_link": "https://crimson-spaceship-325926.postman.co/workspace/apiNews~2fc45775-55a6-4df0-9649-37701e8bfa68/collection/29089140-104c5141-8b5b-495e-9d60-a97b6a9b1b0d?action=share&source=collection_link&creator=29089140"
+	},
+	"item": [
+		{
+			"name": "Atualizar Noticia",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"titulo2\",\r\n  \"sinopse\": \"sinopse\",\r\n  \"imagemCapa\": \"imagem\",\r\n  \"siteBuscado\":\"g1\",\r\n  \"categoria\": \"categoria\",\r\n  \"autoria\": \"autoria\",\r\n  \"dataModificada\": \"2023-11-29T08:06:00\",\r\n  \"conteudo\": \"conteudo\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{apiFrontBuscador}}/noticia?linkNoticia=linkRepghfortagemf5",
+					"protocol": "http",
+					"host": [
+						"{{apiFrontBuscador}}"
+					],
+					"path": [
+						"noticia"
+					],
+					"query": [
+						{
+							"key": "linkNoticia",
+							"value": "linkRepghfortagemf5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Noticia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"titulod5\",\r\n  \"sinopse\": \"sinopse\",\r\n  \"imagemCapa\": \"imagem\",\r\n  \"siteBuscado\":\"g1\",\r\n  \"linkDaNoticiaOficial\": \"linkReportagemf5\",\t\r\n  \"categoria\": \"categoria\",\r\n  \"autoria\": \"autoria3\",\r\n  \"dataPublicacao\": \"2023-11-29T08:06:00\",\r\n  \"conteudo\": \"conteudo\",\r\n  \"numeroVisualizacao\": 550,\r\n    \"tags\": [\r\n    {\r\n      \"nome\": \"\"\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{apiFrontBuscador}}/noticia",
+					"protocol": "http",
+					"host": [
+						"{{apiFrontBuscador}}"
+					],
+					"path": [
+						"noticia"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

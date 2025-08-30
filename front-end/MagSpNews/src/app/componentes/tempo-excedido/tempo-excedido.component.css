@@ -1,0 +1,34 @@
+.espaco__tempo__excedido {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 85px;
+    width: 100%;
+}
+
+.espaco__tempo__excedido__previas {
+    margin-top: 50px;
+}
+
+.mensagem__tempo__excedido {
+    color: var(--cor-padrao);
+    font-family: var(--fonte-padrao-portal);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+    text-align: center;
+}
+
+.botao__tentar__novamente {
+    background-color: var(--cor-padrao);
+    border-radius: 8px;
+    color: var(--cor-letra-branca);
+    font-family: var(--fonte-padrao-portal);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22px;
+    margin: 20px;
+    padding: 12px;
+    width: 280px;
+}

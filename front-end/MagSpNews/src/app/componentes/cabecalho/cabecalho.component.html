@@ -1,0 +1,80 @@
+<header class="cabecalho" [ngClass]="{ cabecalho__fixo: cabecalhoFixo }">
+  <div
+    [ngClass]="{
+      cabecalho__barra__pesquisa: barraDePesquisaAberta,
+      conteudo__cabecalho: !barraDePesquisaAberta
+    }"
+  >
+    <div class="menu" *ngIf="!barraDePesquisaAberta">
+      <div for="menu" class="icone__menu" (click)="abrirMenu()" data-test="iconeMenu"></div>
+    </div>
+    <app-menu-hamburguer
+      *ngIf="menuAberto && !barraDePesquisaAberta"
+      (fecharMenu)="fecharMenu()"
+    ></app-menu-hamburguer>
+    <div class="logo"  *ngIf="!barraDePesquisaAberta" routerLink="/home" (mousedown)="exibirHomeNovaAba($event)"></div>
+    <h1
+      class="titulo"
+      (click)="redirecionar(titulo)"
+      *ngIf="!barraDePesquisaAberta"
+    >
+      {{ titulo | limitarCaracteres: 22}}
+    </h1>
+    <div
+      [ngClass]="{
+        campo__busca: !barraDePesquisaAberta,
+        campo__busca__autocomplete: barraDePesquisaAberta
+      }"
+    >
+      <div
+        [ngClass]="{
+          campo__busca__mobile: barraDePesquisaAberta,
+          campo__busca__desktop:!barraDePesquisaAberta && larguraDaTela >= 1024,
+          campoOculto: !barraDePesquisaAberta && larguraDaTela < 1025
+        }"
+      >
+        <input
+          type="text"
+          placeholder="Busque aqui..."
+          (keyup.enter)="pesquisar()"
+          [(ngModel)]="pesquisa"
+          (input)="onInput()"
+          (blur)="fecharAutocomplete()"
+          data-test="inputBusca"
+        />
+        <div
+          class="icone__campo__busca"
+          (click)="pesquisar()"
+          *ngIf="!barraDePesquisaAberta"
+        ></div>
+        <div
+          class="icone__fechar__campo"
+          (click)="barraDePesquisaAberta = false"
+          *ngIf="barraDePesquisaAberta"
+          data-test="fecharBuscaMobile"
+        ></div>
+      </div>
+      <ul
+        class="opcoes__autocomplete"
+        *ngIf="
+          ((resultadoBuscaTag.length > 0 &&
+            larguraDaTela < 1025 && barraDePesquisaAberta) ||
+          (resultadoBuscaTag.length > 0 && larguraDaTela > 1025)) && autocompleteAberto
+        "
+      >
+        <li
+          *ngFor="let tag of resultadoBuscaTag"
+          (click)="completarCampoDeBuca(tag.nome)"
+        >
+          {{ tag.nome }}
+        </li>
+      </ul>
+      <div
+        class="icone__campo__busca__mobile"
+        (click)="barraDePesquisaAberta = true"
+        *ngIf="!barraDePesquisaAberta"
+        data-test="abrirBuscaMobile"
+      ></div>
+    </div>
+  </div>
+</header>

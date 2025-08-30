@@ -1,0 +1,20 @@
+:host {
+  --fonte-padrao-portal: "Bree Serif", serif;
+  --fonte-padrao-noticia: "Oswald", sans-serif;
+  --cor-padrao: #ff4500;
+  --cor-fundo: #FCF7F8;
+  --cor-letra-branca: #FFFFFF;
+  --cor-letra-preta: #000000;
+  --largura-carrossel: 1000px;
+  --largura-noticia: 1000px;
+  --largura-tela-busca: 1000px;
+  --largura-not-found: 1000px;
+}
+
+@media (max-width: 630px) {
+  .barra__navegacao {
+    display: none;
+  }
+}
+
+

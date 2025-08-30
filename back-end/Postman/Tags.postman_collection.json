@@ -1,0 +1,48 @@
+{
+	"info": {
+		"_postman_id": "1f689087-ce3a-4d82-91ba-75ea2c066b7f",
+		"name": "Tags",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29089140",
+		"_collection_link": "https://crimson-spaceship-325926.postman.co/workspace/apiNews~2fc45775-55a6-4df0-9649-37701e8bfa68/collection/29089140-1f689087-ce3a-4d82-91ba-75ea2c066b7f?action=share&source=collection_link&creator=29089140"
+	},
+	"item": [
+		{
+			"name": "Listar Tags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{apiFrontEndl}}/tag",
+					"protocol": "http",
+					"host": [
+						"{{apiFrontEndl}}"
+					],
+					"path": [
+						"tag"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Tags por nome",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{apiFrontEndl}}/tag/",
+					"protocol": "http",
+					"host": [
+						"{{apiFrontEndl}}"
+					],
+					"path": [
+						"tag",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
